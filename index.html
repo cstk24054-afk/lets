@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Takaya Sato | Portfolio</title>
+    <title>Takaya Sato — Studio / Portfolio</title>
     <style>
-        /* クリエイティブ・ミニマルデザインシステム */
+        /* ハイエンド・ミニマリズム・デザインシステム */
         :root {
-            --bg-color: #080d11;       /* 深夜の原風景を思わせるディープブラック */
-            --text-main: #f8fafc;      /* 静かに主張するオフホワイト */
-            --text-sub: #64748b;       /* 繊細なニュアンスのグレー */
-            --accent-color: #38bdf8;   /* 黎明の光を放つシアン */
-            --line-color: rgba(255, 255, 255, 0.05);
+            --color-bg: #050709;          /* 純粋な黒に限りなく近いディープグラファイト */
+            --color-text-primary: #f8fafc; /* 眩しさを抑えた上質なオフホワイト */
+            --color-text-secondary: #64748b; /* 静かな陰影を作るミディアムグレー */
+            --color-text-muted: #334155;    /* 構造のためのダークグレー */
+            --color-accent: #0284c7;       /* 研ぎ澄まされたインテリジェンス・ブルー */
+            --border-subtle: rgba(255, 255, 255, 0.03);
+            --font-mono: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
         }
 
         * {
@@ -21,300 +23,323 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Inter', '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Kaku Gothic ProN', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-
-            /* CSSグラデーションのみで構築した「静寂な大自然の景色」 */
-            background-image: 
-                /* 夜空にちりばめられた星々の輝き（星屑の粒子） */
-                radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-                radial-gradient(circle at 80% 35%, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
-                radial-gradient(circle at 45% 15%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                /* 地平線の向こうから湧き上がる山脈と朝靄の光景 */
-                radial-gradient(circle at 100% 100%, rgba(14, 116, 144, 0.18) 0%, transparent 65%),
-                radial-gradient(circle at 0% 100%, rgba(3, 105, 120, 0.22) 0%, transparent 55%),
-                radial-gradient(circle at 50% 130%, rgba(56, 189, 248, 0.12) 0%, transparent 45%);
-            background-attachment: fixed;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* 画面全体をグリッドラインで構造化するビューポート */
+        /* 高級感を演出するシネマティックな背景演出（画像不使用） */
+        .scenery-layer {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
+            pointer-events: none;
+            /* 深夜の地平線に漂う微かな光の諧調を再現 */
+            background: radial-gradient(circle at 50% 110%, rgba(2, 132, 199, 0.08) 0%, rgba(5, 7, 9, 0) 70%);
+        }
+
+        /* グリッドシステム（エンジニアリングの構造美） */
+        .grid-frame {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1;
+            pointer-events: none;
+            border-left: 1px solid var(--border-subtle);
+            border-right: 1px solid var(--border-subtle);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* メインコンテナ */
         .viewport {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 60px 80px;
-            position: relative;
-            z-index: 1;
+            padding: 80px 60px;
         }
 
-        /* 鈴木仁氏らのサイトに見られる、空間の緊張感を高める細い垂直線 */
-        .viewport::before, .viewport::after {
-            content: "";
-            position: fixed;
-            top: 0; bottom: 0;
-            width: 1px;
-            background-color: var(--line-color);
-            pointer-events: none;
-            z-index: -1;
-        }
-        .viewport::before { left: 80px; }
-        .viewport::after { right: 80px; }
-
-        /* ヘッダー：大胆かつ洗練されたタイポグラフィ */
+        /* HEADER */
         header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            border-bottom: 1px solid var(--line-color);
-            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 40px;
         }
 
-        .brand h1 {
-            font-size: 2.6rem;
-            font-weight: 800;
+        .identity {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .identity .status {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            font-weight: 600;
+        }
+
+        .identity h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
             letter-spacing: -0.04em;
-            line-height: 1.05;
-            text-transform: uppercase;
+            line-height: 1;
         }
 
-        .brand .subtitle {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            margin-top: 6px;
+        .identity .title-sub {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            font-weight: 400;
         }
 
-        /* ナビゲーション */
+        /* 建築的な美しさを持つナビゲーション */
         nav {
             display: flex;
-            gap: 40px;
+            gap: 48px;
         }
 
-        .nav-link {
+        .nav-btn {
             background: none;
             border: none;
-            color: var(--text-sub);
-            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.25em;
             cursor: pointer;
-            padding: 5px 0;
-            transition: color 0.3s ease, transform 0.3s ease;
+            padding: 8px 0;
             position: relative;
+            transition: color 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .nav-link:hover, .nav-link.active {
-            color: var(--text-main);
+        .nav-btn:hover, .nav-btn.active {
+            color: var(--color-text-primary);
         }
 
-        /* アンダーラインのアニメーション */
-        .nav-link::after {
+        .nav-btn::after {
             content: "";
             position: absolute;
-            bottom: 0; left: 0;
+            bottom: -41px; left: 0;
             width: 0; height: 1px;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
+            background-color: var(--color-text-primary);
+            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .nav-link.active::after {
+        .nav-btn.active::after {
             width: 100%;
         }
 
-        /* メインコンテンツ（画面中央〜下部へかけてダイナミックに配置） */
+        /* MAIN CONTENT */
         main {
             flex-grow: 1;
             display: flex;
             align-items: center;
-            margin: 80px 0;
-            max-width: 950px;
+            padding: 80px 0;
         }
 
-        .content-section {
+        .section-view {
             display: none;
             width: 100%;
         }
 
-        .content-section.active {
+        .section-view.active {
             display: block;
-            animation: shiftUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            /* プロレベルのスムーズな出現アニメーション */
+            animation: cubicReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
-        /* 没入感を生み出すフェード＆シフティングアニメーション */
-        @keyframes shiftUp {
-            from { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+        @keyframes cubicReveal {
+            from { opacity: 0; transform: translateY(30px); filter: blur(4px); }
             to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        /* 主役となる巨大なテキストスタイル */
-        .huge-text {
-            font-size: 2.4rem;
-            font-weight: 700;
-            line-height: 1.6;
-            letter-spacing: -0.02em;
-            color: var(--text-main);
+        /* タイポグラフィが主役のタイポテキスト */
+        .leading-text {
+            font-size: 2.8rem;
+            font-weight: 600;
+            line-height: 1.5;
+            letter-spacing: -0.03em;
+            max-width: 1050px;
         }
 
-        .huge-text span {
-            color: var(--text-sub);
+        .leading-text span {
+            color: var(--color-text-secondary);
         }
 
-        /* グリッドを用いた情報のミニマルな配置 */
-        .info-grid {
+        /* 厳格に構築されたインフォメーション構造 */
+        .meta-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 50px;
-            margin-top: 15px;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 40px;
+            width: 100%;
         }
 
-        .info-item {
-            border-top: 1px solid var(--line-color);
-            padding-top: 25px;
+        .meta-col-4 {
+            grid-column: span 4;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 30px;
         }
 
-        .info-item .label {
+        .meta-col-8 {
+            grid-column: span 8;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 30px;
+        }
+
+        .index-number {
+            font-family: var(--font-mono);
             font-size: 0.75rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 12px;
-            font-weight: 700;
+            color: var(--color-text-secondary);
+            margin-bottom: 16px;
+            display: block;
         }
 
-        .info-item p {
-            font-size: 1.1rem;
-            color: var(--text-main);
-            font-weight: 400;
-            opacity: 0.95;
+        .item-heading {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
         }
 
-        /* フッター */
+        .item-body {
+            color: var(--color-text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.75;
+        }
+
+        /* FOOTER */
         footer {
-            border-top: 1px solid var(--line-color);
-            padding-top: 25px;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.75rem;
-            color: var(--text-sub);
-            letter-spacing: 0.15em;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--color-text-muted);
+            letter-spacing: 0.2em;
             text-transform: uppercase;
         }
 
-        /* モバイル対応のレスポンシブ設計 */
-        @media (max-width: 900px) {
-            .viewport {
-                padding: 40px 24px;
-            }
-            .viewport::before { left: 24px; }
-            .viewport::after { right: 24px; }
-            
-            header {
-                flex-direction: column;
-                gap: 30px;
-            }
-            nav {
-                width: 100%;
-                justify-content: space-between;
-                gap: 5px;
-            }
-            .nav-link {
-                font-size: 0.75rem;
-                letter-spacing: 0.12em;
-            }
-            .huge-text {
-                font-size: 1.5rem;
-                line-height: 1.5;
-            }
-            .brand h1 {
-                font-size: 2.1rem;
-            }
-            main {
-                margin: 50px 0;
-            }
-            .info-grid {
-                gap: 30px;
-            }
+        .footer-brand {
+            color: var(--color-text-secondary);
+            font-weight: 700;
+        }
+
+        /* RESPONSIVE DESIGN (モバイル・タブレット最適化) */
+        @media (max-width: 1024px) {
+            .viewport { padding: 60px 40px; }
+            .grid-frame { left: 40px; right: 40px; }
+            .leading-text { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .viewport { padding: 40px 24px; }
+            .grid-frame { display: none; }
+            header { flex-direction: column; align-items: flex-start; gap: 32px; }
+            nav { width: 100%; justify-content: space-between; gap: 0; }
+            .nav-btn::after { bottom: -33px; }
+            .leading-text { font-size: 1.5rem; line-height: 1.6; }
+            .meta-layout { display: flex; flex-direction: column; gap: 40px; }
+            .meta-col-4, .meta-col-8 { padding-top: 24px; }
+            .item-heading { font-size: 1.25rem; }
         }
     </style>
 </head>
 <body>
 
+    <div class="scenery-layer"></div>
+    <div class="grid-frame"></div>
+
     <div class="viewport">
         
         <header>
-            <div class="brand">
+            <div class="identity">
+                <span class="status">// AVAILABLE FOR RESEARCH</span>
                 <h1>Takaya Sato</h1>
-                <div class="subtitle">Applied Information Engineering</div>
+                <span class="title-sub">理工学部 応用情報工学科</span>
             </div>
             
             <nav role="tablist">
-                <button class="nav-link active" onclick="switchTab('about')" role="tab" aria-selected="true">About</button>
-                <button class="nav-link" onclick="switchTab('skills')" role="tab" aria-selected="false">Skills</button>
-                <button class="nav-link" onclick="switchTab('works')" role="tab" aria-selected="false">Works</button>
-                <button class="nav-link" onclick="switchTab('reflection')" role="tab" aria-selected="false">Reflection</button>
+                <button class="nav-btn active" onclick="switchTab('about')" role="tab" aria-selected="true">01. About</button>
+                <button class="nav-btn" onclick="switchTab('skills')" role="tab" aria-selected="false">02. Skills</button>
+                <button class="nav-btn" onclick="switchTab('works')" role="tab" aria-selected="false">03. Works</button>
+                <button class="nav-btn" onclick="switchTab('reflection')" role="tab" aria-selected="false">04. Reflection</button>
             </nav>
         </header>
 
         <main>
-            <section id="about" class="content-section active" role="tabpanel">
-                <p class="huge-text">
-                    大学の理工学部にて応用情報工学を専攻。<span>コンピュータサイエンスの根幹を突き詰め、抽象的なコードから強固なロジックを組み立てる。技術の本質を学び、デジタルにおける表現の可能性を模索しています。</span>
+            <section id="about" class="section-view active" role="tabpanel">
+                <p class="leading-text">
+                    構造化と最適化への探求。 <span>情報工学が持つ冷徹なロジックを、美しく無駄のないアーキテクチャへと昇華させる。技術の本質を解剖し、破綻のないデジタル表現を構築するための研究を行っています。</span>
                 </p>
             </section>
 
-            <section id="skills" class="content-section" role="tabpanel">
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="label">01 / Engineering</div>
-                        <p>情報工学全般。ネットワーク、アルゴリズム、データベースなど、IT社会の基盤を支える基礎理論の網羅的習得。</p>
+            <section id="skills" class="section-view" role="tabpanel">
+                <div class="meta-layout">
+                    <div class="meta-col-4">
+                        <span class="index-number">SYS / 01</span>
+                        <h3 class="item-heading">情報工学</h3>
+                        <p class="item-body">アルゴリズムの計算効率、データ構造の設計、およびネットワークアーキテクチャの基本理論。効率的で強固な基盤システムへの学術的アプローチ。</p>
                     </div>
-                    <div class="info-item">
-                        <div class="label">02 / Language</div>
-                        <p>HTML/CSSをはじめとするプログラミング言語の構造理解と、Webフロントエンドにおけるモダンアーキテクチャの学習。</p>
+                    <div class="meta-col-8">
+                        <span class="index-number">FED / 02</span>
+                        <h3 class="item-heading">プログラミング・Web標準</h3>
+                        <p class="item-body">HTML5/CSS3に準拠した完璧なセマンティクス（意味論的コーディング）。UIフレームワークに依存せず、ブラウザ自体のレンダリングメカニズムを最適化し、軽量かつデバイスを選ばない堅牢なフロントエンドの実装を信条としています。</p>
                     </div>
                 </div>
             </section>
 
-            <section id="works" class="content-section" role="tabpanel">
-                <div class="info-grid">
-                    <div class="info-item" style="grid-column: 1 / -1;">
-                        <div class="label">Project / 01</div>
-                        <p style="font-size: 1.7rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.01em;">Webフロントエンド設計 & GitHubによるグローバル展開</p>
-                        <p style="color: var(--text-sub); font-size: 1.05rem; line-height: 1.7;">
-                            大学の演習として、外部ライブラリを徹底的に排除したピュアなHTML/CSSによるWebサイトを設計。GitHub Pagesを用いて実環境へデプロイし、モダンなソースコード管理と、Web標準に準拠したセマンティックな構造化を実践。
+            <section id="works" class="section-view" role="tabpanel">
+                <div class="meta-layout">
+                    <div class="meta-col-8" style="grid-column: span 12;">
+                        <span class="index-number">CASE_STUDY / 001</span>
+                        <h3 class="item-heading">Web標準に基づくインターフェース構築とGitHubでの分散管理</h3>
+                        <p class="item-body" style="margin-bottom: 20px;">
+                            学内演習の一環として開発された、一切の外部拡張を排除したスタティック・ポートフォリオ。ブラウザが解釈するネイティブなコードロジックのみを突き詰め、情報伝達速度とアクセシビリティの最高到達点を検証。
+                        </p>
+                        <p class="item-body">
+                            Gitを用いた厳格なバージョンコントロールを実行し、GitHub Pagesによる自動デプロイメント環境を構築。モダン開発のコアサイクルであるソース管理と公開フローを網羅。
                         </p>
                     </div>
                 </div>
             </section>
 
-            <section id="reflection" class="content-section" role="tabpanel">
-                <p class="huge-text">
-                    コードがブラウザ上で形を成した瞬間、静的な記述がひとつのデザインへ変わる美しさにインスピレーションを受けた。<span>現在は基礎ですが、今後はJavaScriptによる動的制御、そしてバックエンドシステムとの高度な連携を見据え、より深いクリエイティブの領域へ挑戦を続けます。</span>
+            <section id="reflection" class="section-view" role="tabpanel">
+                <p class="leading-text">
+                    抽象的なコードが、意味を持ったインターフェースへと結実する。<span>このフロントエンド工学の構造美に、強い関心を抱いています。今後は論理的な静的設計をベースに、JavaScriptによる高度な動的制御、およびバックエンドの連携を通じ、エンドツーエンドのシステムデザインに挑戦します。</span>
                 </p>
             </section>
         </main>
 
         <footer>
-            <div>© 2026 Takaya Sato.</div>
-            <div>Built with pure source logic.</div>
+            <div class="footer-brand">T.SATO</div>
+            <div>CURRENT_YEAR: 2026 — INDEXED</div>
+            <div>PURE_ARCH // NO_LIBRARY</div>
         </footer>
 
     </div>
 
     <script>
         function switchTab(sectionId) {
-            const sections = document.querySelectorAll('.content-section');
+            const sections = document.querySelectorAll('.section-view');
             sections.forEach(section => section.classList.remove('active'));
 
-            const buttons = document.querySelectorAll('.nav-link');
+            const buttons = document.querySelectorAll('.nav-btn');
             buttons.forEach(button => {
                 button.classList.remove('active');
                 button.setAttribute('aria-selected', 'false');
