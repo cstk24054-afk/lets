@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Takaya Sato | Portfolio</title>
     <style>
-        /* デザインシステム */
+        /* クリエイティブ・ミニマルデザインシステム */
         :root {
-            --text-color: #ffffff; /* フルスクリーンで映える白文字 */
-            --text-sub: #e0f7fa;   /* 薄いシアンのサブテキスト */
-            --primary-color: #ffffff;
-            --accent-color: #80deea;
-            /* 画面全体を覆う、景色を殺さない程度の暗め・深みのあるグラデーション */
-            --screen-overlay: linear-gradient(to bottom, rgba(10, 40, 45, 0.45) 0%, rgba(10, 50, 55, 0.7) 60%, rgba(5, 25, 30, 0.85) 100%);
+            --bg-color: #080d11;       /* 深夜の原風景を思わせるディープブラック */
+            --text-main: #f8fafc;      /* 静かに主張するオフホワイト */
+            --text-sub: #64748b;       /* 繊細なニュアンスのグレー */
+            --accent-color: #38bdf8;   /* 黎明の光を放つシアン */
+            --line-color: rgba(255, 255, 255, 0.05);
         }
 
         * {
@@ -22,92 +21,122 @@
         }
 
         body {
-            color: var(--text-color);
-            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
-            line-height: 1.8;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Kaku Gothic ProN', sans-serif;
             min-height: 100vh;
-            position: relative;
             overflow-x: hidden;
+            position: relative;
 
-            /* --- CSSで描く大自然の景色 --- */
-            background: 
-                linear-gradient(180deg, transparent 70%, rgba(178, 235, 242, 0.3) 90%, rgba(224, 247, 250, 0.5) 100%),
-                radial-gradient(circle at 10% 75%, #4caf50 0%, #1b5e20 50%, transparent 75%),
-                radial-gradient(circle at 90% 80%, #81c784 0%, #2e7d32 55%, transparent 80%),
-                radial-gradient(circle at 50% 85%, #a5d6a7 0%, #1b5e20 60%, transparent 95%),
-                radial-gradient(circle at 30% 60%, #80deea 0%, #006064 60%, transparent 80%),
-                radial-gradient(circle at 70% 65%, #b2ebf2 0%, #00838f 60%, transparent 80%),
-                radial-gradient(circle at 50% 30%, #fff9c4 0%, #ffecb3 15%, #e0f7fa 50%, #b2ebf2 100%);
-            background-size: cover;
+            /* CSSグラデーションのみで構築した「静寂な大自然の景色」 */
+            background-image: 
+                /* 夜空にちりばめられた星々の輝き（星屑の粒子） */
+                radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+                radial-gradient(circle at 80% 35%, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+                radial-gradient(circle at 45% 15%, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                /* 地平線の向こうから湧き上がる山脈と朝靄の光景 */
+                radial-gradient(circle at 100% 100%, rgba(14, 116, 144, 0.18) 0%, transparent 65%),
+                radial-gradient(circle at 0% 100%, rgba(3, 105, 120, 0.22) 0%, transparent 55%),
+                radial-gradient(circle at 50% 130%, rgba(56, 189, 248, 0.12) 0%, transparent 45%);
             background-attachment: fixed;
         }
 
-        /* 景色のうえに重ねる画面全体のレイヤー（これで文字の視認性を確保） */
-        .fullscreen-overlay {
-            background: var(--screen-overlay);
-            backdrop-filter: blur(4px); /* 景色をほんのりぼかして奥行きを出す */
-            -webkit-backdrop-filter: blur(4px);
+        /* 画面全体をグリッドラインで構造化するビューポート */
+        .viewport {
             min-height: 100vh;
-            width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 60px 24px;
+            justify-content: space-between;
+            padding: 60px 80px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* 画面全体をダイナミックに使うラッパー */
-        .main-wrapper {
-            max-width: 800px;
-            width: 100%;
+        /* 鈴木仁氏らのサイトに見られる、空間の緊張感を高める細い垂直線 */
+        .viewport::before, .viewport::after {
+            content: "";
+            position: fixed;
+            top: 0; bottom: 0;
+            width: 1px;
+            background-color: var(--line-color);
+            pointer-events: none;
+            z-index: -1;
+        }
+        .viewport::before { left: 80px; }
+        .viewport::after { right: 80px; }
+
+        /* ヘッダー：大胆かつ洗練されたタイポグラフィ */
+        header {
             display: flex;
-            flex-direction: column;
-            flex-grow: 1;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--line-color);
+            padding-bottom: 30px;
         }
 
-        /* メインタイトル */
-        h1 {
-            color: var(--primary-color);
+        .brand h1 {
             font-size: 2.6rem;
-            margin-bottom: 35px;
-            text-align: center;
-            letter-spacing: 0.1em;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            text-transform: uppercase;
         }
 
-        /* 全体画面に合わせたタブナビゲーション */
+        .brand .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-top: 6px;
+        }
+
+        /* ナビゲーション */
         nav {
             display: flex;
-            justify-content: space-around;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 40px;
+            gap: 40px;
         }
 
-        .tab-btn {
+        .nav-link {
             background: none;
             border: none;
             color: var(--text-sub);
-            font-size: 1.1rem;
-            font-weight: bold;
-            padding: 15px 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
             cursor: pointer;
-            transition: all 0.3s ease;
+            padding: 5px 0;
+            transition: color 0.3s ease, transform 0.3s ease;
             position: relative;
-            bottom: -1px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .tab-btn:hover {
-            color: #ffffff;
-            text-shadow: 0 0 8px var(--accent-color);
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-main);
         }
 
-        .tab-btn.active {
-            color: #ffffff;
-            border-bottom: 3px solid var(--accent-color);
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        /* アンダーラインのアニメーション */
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
         }
 
-        /* コンテンツセクション */
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* メインコンテンツ（画面中央〜下部へかけてダイナミックに配置） */
+        main {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            margin: 80px 0;
+            max-width: 950px;
+        }
+
         .content-section {
             display: none;
             width: 100%;
@@ -115,165 +144,177 @@
 
         .content-section.active {
             display: block;
-            animation: fadeInFull 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: shiftUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* 没入感のあるフェードインアニメーション */
-        @keyframes fadeInFull {
-            from { opacity: 0; transform: scale(0.98) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+        /* 没入感を生み出すフェード＆シフティングアニメーション */
+        @keyframes shiftUp {
+            from { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
-        h2 {
-            color: #ffffff;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            border-left: 5px solid var(--accent-color);
-            padding-left: 15px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        /* 主役となる巨大なテキストスタイル */
+        .huge-text {
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1.6;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
         }
 
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: var(--text-sub);
-            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
-        }
-
-        /* リストスタイル */
-        ul {
-            list-style-type: none;
-            margin-bottom: 30px;
-        }
-
-        li {
-            margin-bottom: 18px;
-            padding-left: 28px;
-            position: relative;
-            font-size: 1.1rem;
+        .huge-text span {
             color: var(--text-sub);
         }
 
-        li strong {
-            color: #ffffff;
+        /* グリッドを用いた情報のミニマルな配置 */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-top: 15px;
         }
 
-        li::before {
-            content: "■";
+        .info-item {
+            border-top: 1px solid var(--line-color);
+            padding-top: 25px;
+        }
+
+        .info-item .label {
+            font-size: 0.75rem;
             color: var(--accent-color);
-            font-size: 0.8rem;
-            position: absolute;
-            left: 5px;
-            top: 2px;
-            /* 少し光らせる */
-            box-shadow: 0 0 8px var(--accent-color); 
-        }
-
-        /* フルスクリーンに溶け込むワイドボックス */
-        .box {
-            background-color: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
-            padding: 30px;
-            margin-top: 25px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        }
-
-        .box h3 {
-            color: #ffffff;
-            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
             margin-bottom: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 8px;
+            font-weight: 700;
         }
 
-        /* スマートフォン向けのレスポンシブ調整 */
-        @media (max-width: 600px) {
-            .fullscreen-overlay {
-                padding: 40px 16px;
+        .info-item p {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        /* フッター */
+        footer {
+            border-top: 1px solid var(--line-color);
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* モバイル対応のレスポンシブ設計 */
+        @media (max-width: 900px) {
+            .viewport {
+                padding: 40px 24px;
+            }
+            .viewport::before { left: 24px; }
+            .viewport::after { right: 24px; }
+            
+            header {
+                flex-direction: column;
+                gap: 30px;
             }
             nav {
-                margin-bottom: 30px;
+                width: 100%;
+                justify-content: space-between;
+                gap: 5px;
             }
-            .tab-btn {
-                font-size: 0.95rem;
-                padding: 10px 6px;
+            .nav-link {
+                font-size: 0.75rem;
+                letter-spacing: 0.12em;
             }
-            h1 {
-                font-size: 2rem;
-                margin-bottom: 25px;
-            }
-            h2 {
+            .huge-text {
                 font-size: 1.5rem;
+                line-height: 1.5;
             }
-            .box {
-                padding: 20px;
+            .brand h1 {
+                font-size: 2.1rem;
+            }
+            main {
+                margin: 50px 0;
+            }
+            .info-grid {
+                gap: 30px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="fullscreen-overlay">
-        <div class="main-wrapper">
+    <div class="viewport">
+        
+        <header>
+            <div class="brand">
+                <h1>Takaya Sato</h1>
+                <div class="subtitle">Applied Information Engineering</div>
+            </div>
             
-            <h1>My Portfolio</h1>
-
             <nav role="tablist">
-                <button class="tab-btn active" onclick="switchTab('about')" role="tab" aria-selected="true">About</button>
-                <button class="tab-btn" onclick="switchTab('skills')" role="tab" aria-selected="false">Skills</button>
-                <button class="tab-btn" onclick="switchTab('works')" role="tab" aria-selected="false">Works</button>
-                <button class="tab-btn" onclick="switchTab('reflection')" role="tab" aria-selected="false">Reflection</button>
+                <button class="nav-link active" onclick="switchTab('about')" role="tab" aria-selected="true">About</button>
+                <button class="nav-link" onclick="switchTab('skills')" role="tab" aria-selected="false">Skills</button>
+                <button class="nav-link" onclick="switchTab('works')" role="tab" aria-selected="false">Works</button>
+                <button class="nav-link" onclick="switchTab('reflection')" role="tab" aria-selected="false">Reflection</button>
             </nav>
+        </header>
 
-            <main>
-                <section id="about" class="content-section active" role="tabpanel">
-                    <h2>About Me</h2>
-                    <p>はじめまして。大学の理工学部で応用情報工学を専攻している学生です。現在は、学内での講義や演習を通じて、コンピュータサイエンスの基礎から実践的なアプリケーション開発までを幅広く学んでいます。</p>
-                    <p>このページでは、これまでに触れてきた技術や、授業を通じて作成した成果物について紹介しています。</p>
-                </section>
+        <main>
+            <section id="about" class="content-section active" role="tabpanel">
+                <p class="huge-text">
+                    大学の理工学部にて応用情報工学を専攻。<span>コンピュータサイエンスの根幹を突き詰め、抽象的なコードから強固なロジックを組み立てる。技術の本質を学び、デジタルにおける表現の可能性を模索しています。</span>
+                </p>
+            </section>
 
-                <section id="skills" class="content-section" role="tabpanel">
-                    <h2>関心分野・学んでいること</h2>
-                    <ul>
-                        <li><strong>情報工学全般:</strong> ネットワーク、アルゴリズム、データベースの基礎など、ITの基盤となる知識の習得に取り組んでいます。</li>
-                        <li><strong>プログラミング言語:</strong> HTML/CSSをはじめ、Webフロントエンドやプログラミングの基礎文法を学習中です。</li>
-                    </ul>
-                </section>
+            <section id="skills" class="content-section" role="tabpanel">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="label">01 / Engineering</div>
+                        <p>情報工学全般。ネットワーク、アルゴリズム、データベースなど、IT社会の基盤を支える基礎理論の網羅的習得。</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">02 / Language</div>
+                        <p>HTML/CSSをはじめとするプログラミング言語の構造理解と、Webフロントエンドにおけるモダンアーキテクチャの学習。</p>
+                    </div>
+                </div>
+            </section>
 
-                <section id="works" class="content-section" role="tabpanel">
-                    <h2>授業での成果物</h2>
-                    <div class="box">
-                        <h3>GitHubによるWebサイト制作</h3>
-                        <p style="font-size: 1rem; margin-top: 5px;">
-                            大学の授業課題の一環として、GitHub Pagesを利用した静的なWebサイトを構築・一般公開しました。
-                        </p>
-                        <p style="font-size: 1rem; opacity: 0.9;">
-                            外部のライブラリに頼らず、HTMLとCSSの基本タグのみを用いて構造化とスタイリングを行うことで、Web標準の仕組みとソースコード管理の基本を実践的に学びました。
+            <section id="works" class="content-section" role="tabpanel">
+                <div class="info-grid">
+                    <div class="info-item" style="grid-column: 1 / -1;">
+                        <div class="label">Project / 01</div>
+                        <p style="font-size: 1.7rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.01em;">Webフロントエンド設計 & GitHubによるグローバル展開</p>
+                        <p style="color: var(--text-sub); font-size: 1.05rem; line-height: 1.7;">
+                            大学の演習として、外部ライブラリを徹底的に排除したピュアなHTML/CSSによるWebサイトを設計。GitHub Pagesを用いて実環境へデプロイし、モダンなソースコード管理と、Web標準に準拠したセマンティックな構造化を実践。
                         </p>
                     </div>
-                </section>
+                </div>
+            </section>
 
-                <section id="reflection" class="content-section" role="tabpanel">
-                    <h2>振り返りと今後の展望</h2>
-                    <div class="box">
-                        <p>初めて自分で記述したHTML/CSSが、ブラウザ上で意図した通りのデザインとして表示された瞬間に大きな達成感を覚えました。</p>
-                        <p style="margin-bottom: 0; opacity: 0.9;">現在はまだ静的なページ構成が中心ですが、今後はJavaScriptを活用した動的な機能の実装や、バックエンド技術との連携にも視野を広げ、より実用的なWebシステム開発に挑戦していきたいと考えています。</p>
-                    </div>
-                </section>
-            </main>
+            <section id="reflection" class="content-section" role="tabpanel">
+                <p class="huge-text">
+                    コードがブラウザ上で形を成した瞬間、静的な記述がひとつのデザインへ変わる美しさにインスピレーションを受けた。<span>現在は基礎ですが、今後はJavaScriptによる動的制御、そしてバックエンドシステムとの高度な連携を見据え、より深いクリエイティブの領域へ挑戦を続けます。</span>
+                </p>
+            </section>
+        </main>
 
-        </div>
+        <footer>
+            <div>© 2026 Takaya Sato.</div>
+            <div>Built with pure source logic.</div>
+        </footer>
+
     </div>
 
     <script>
         function switchTab(sectionId) {
             const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
+            sections.forEach(section => section.classList.remove('active'));
 
-            const buttons = document.querySelectorAll('.tab-btn');
+            const buttons = document.querySelectorAll('.nav-link');
             buttons.forEach(button => {
                 button.classList.remove('active');
                 button.setAttribute('aria-selected', 'false');
